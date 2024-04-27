@@ -6,8 +6,6 @@
 #include <cstdlib>
 #include <iomanip>
 
-using namespace std;
-
 class TTT{
     public:
         //member FUNCTIONS

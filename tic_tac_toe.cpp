@@ -12,8 +12,6 @@
 #include <cstdlib>  //access to system function calls
 #include <iomanip>  //access to manipulate output
 
-using namespace std;
-
 //prototypes
 void splashScreen();
 void askForUserNames(string&, string&);
@@ -69,11 +67,11 @@ int main()
 void splashScreen()
 {
     system("clear"); 
-    cout << setfill('*') << setw(24) << "\n" << setfill('*') << setw(24) << "\n";
-    cout << "****  TIC-TAC-TOE  ****" << endl;
-    cout << "****      By       ****" << endl;
-    cout << "****Braulio Viveros****" << endl;
-    cout << setfill('*') << setw(24) << "\n" << setfill('*') << setw(24) << "\n";
+    std::cout << setfill('*') << setw(24) << "\n" << setfill('*') << setw(24) << "\n";
+    std::cout << "****  TIC-TAC-TOE  ****" << std::endl;
+    std::cout << "****      By       ****" << std::endl;
+    std::cout << "****Braulio Viveros****" << std::endl;
+    std::cout << setfill('*') << setw(24) << "\n" << setfill('*') << setw(24) << "\n";
 
     system("read ballZ"); //pauses the program
 }
@@ -85,13 +83,13 @@ void askForUserNames(string& player1, string& player2)
     system("clear"); //clears terminal screen
 
     //prompts user and accepts player one's name
-    cout << "Player 1,Enter your name\nEnter a single word with alpha chars only! " << endl;
-    getline(cin, player1);
+    std::cout << "Player 1,Enter your name\nEnter a single word with alpha chars only! " << std::endl;
+    getline(std::cin, player1);
     validateUserName(player1); //validates user's entry to be a single string of alpha characters
 
     //prompts user and accepts player two's name
-    cout << "Player 2,Enter your name\nEnter a single word with alpha chars only! " << endl;
-    getline(cin, player2);
+    std::cout << "Player 2,Enter your name\nEnter a single word with alpha chars only! " << std::endl;
+    getline(std::cin, player2);
     validateUserName(player2); //validates user's entry to be a single string of alpha characters
 }
 
@@ -106,8 +104,8 @@ void validateUserName(string& userName)
         if(!isalpha(userName[counter])){//runs if non alphabet characters detected
 
             //prompts user to re enter their first name
-            cout << "Invalid name\nEnter a single word with alpha chars only!" << endl;
-            getline(cin, userName);
+            std::cout << "Invalid name\nEnter a single word with alpha chars only!" << std::endl;
+            getline(std::cin, userName);
             counter = 0;//resets counter to 0
         }
         else{
@@ -128,13 +126,13 @@ void displayGrid(string grid[], string& playerMove, const string player1, const 
         system("clear"); //clears terminal screen
 
         //outputs updated tic-tac-toe playing field
-        cout << "TIC-TAC-TOE" << endl;
-        cout << "|-----|" << endl;
-        cout << "|" << grid[0] << "|" << grid[1] << "|" << grid[2] << "|" << endl;
-        cout << "|-----|" << endl;
-        cout << "|" << grid[3] << "|" << grid[4] << "|" << grid[5] << "|" << endl;
-        cout << "|-----|" << endl;
-        cout << "|" << grid[6] << "|" << grid[7] << "|" << grid[8] << "|" << endl;
+        std::cout << "TIC-TAC-TOE" << std::endl;
+        std::cout << "|-----|" << std::endl;
+        std::cout << "|" << grid[0] << "|" << grid[1] << "|" << grid[2] << "|" << std::endl;
+        std::cout << "|-----|" << std::endl;
+        std::cout << "|" << grid[3] << "|" << grid[4] << "|" << grid[5] << "|" << std::endl;
+        std::cout << "|-----|" << std::endl;
+        std::cout << "|" << grid[6] << "|" << grid[7] << "|" << grid[8] << "|" << std::endl;
 
         //function call, allows players to take thier turns
         playerMakeMove(grid, playerMove, player1, player2, numOfMoves, playerOneTurn, win);
@@ -169,8 +167,8 @@ void playerMakeMove(string grid[], string& playerMove, const string player1, con
     }
 
     //displays respective player's name and game piece
-    cout << "It is " << player << "'s turn; You are " << piece << "\nGive me your best move!" << endl;
-    getline(cin, playerMove); //accepts player's move
+    std::cout << "It is " << player << "'s turn; You are " << piece << "\nGive me your best move!" << std::endl;
+    getline(std::cin, playerMove); //accepts player's move
 
     validatePlayersMove(grid, playerMove, player); //function call, validates player's move
     updateGrid(grid, playerMove, playerOneTurn); //function call, updates game grid
@@ -207,9 +205,9 @@ void validatePlayersMove(const string grid[], string& playerMove, const string p
         else
         {
             //prompts user to try to re-enter a valid move
-            cout << "invalid entry" << endl;
-            cout << player << "'s turn" << endl;
-            getline(cin, playerMove);
+            std::cout << "invalid entry" << std::endl;
+            std::cout << player << "'s turn" << std::endl;
+            getline(std::cin, playerMove);
         }
     }
 }
@@ -226,9 +224,9 @@ void checkPositionAvailability(const string grid[], string& playerMove, bool& va
     if(grid[move] == "X" || grid[move] == "O")
     {
         //displays appropriate message and prompts user to re-enter a valid move
-        cout << "Position not available" << endl;
-        cout << "make a different choice" << endl;
-        getline(cin, playerMove);
+        std::cout << "Position not available" << std::endl;
+        std::cout << "make a different choice" << std::endl;
+        getline(std::cin, playerMove);
     }
     else
     {
@@ -357,7 +355,7 @@ void checkWin(const string grid[], string player, bool& win)
     {
         displayFinalGrid(grid);
         win = true; //signals that there is a winner
-        cout << player << " wins!" << endl; //displays the winner
+        std::cout << player << " wins!" << std::endl; //displays the winner
     }
     //possible winning combinations for second player
     else if (
@@ -372,7 +370,7 @@ void checkWin(const string grid[], string player, bool& win)
     {
         displayFinalGrid(grid);
         win = true; //signals that there is a winner
-        cout << player << " wins!" << endl; //displays the winner
+        std::cout << player << " wins!" << std::endl; //displays the winner
     }
 }
 
@@ -385,7 +383,7 @@ void checkTie(string grid[], const int numOfMoves, const bool win, bool& endGame
     {
         //displays the final grid
         displayFinalGrid(grid);
-        cout << "The game was a tie!" << endl; //outputs tie game
+        std::cout << "The game was a tie!" << std::endl; //outputs tie game
         endGame = true; //signals the end of the game
     }
 }
@@ -396,13 +394,13 @@ void displayFinalGrid(const string grid[])
     system("clear"); //clears terminal screen
 
     //outputs updated and final tic-tac-toe playing field
-    cout << "TIC-TAC-TOE" << endl;
-    cout << "|-----|" << endl;
-    cout << "|" << grid[0] << "|" << grid[1] << "|" << grid[2] << "|" << endl;
-    cout << "|-----|" << endl;
-    cout << "|" << grid[3] << "|" << grid[4] << "|" << grid[5] << "|" << endl;
-    cout << "|-----|" << endl;
-    cout << "|" << grid[6] << "|" << grid[7] << "|" << grid[8] << "|" << endl;
+    std::cout << "TIC-TAC-TOE" << std::endl;
+    std::cout << "|-----|" << std::endl;
+    std::cout << "|" << grid[0] << "|" << grid[1] << "|" << grid[2] << "|" << std::endl;
+    std::cout << "|-----|" << std::endl;
+    std::cout << "|" << grid[3] << "|" << grid[4] << "|" << grid[5] << "|" << std::endl;
+    std::cout << "|-----|" << std::endl;
+    std::cout << "|" << grid[6] << "|" << grid[7] << "|" << grid[8] << "|" << std::endl;
 }
 
 //reset the game when one concludes; this includes filling the array with vales 0-8
@@ -415,8 +413,8 @@ void resetGame(string grid[], int& numOfMoves, bool& repeat)
     {
 
         //prompts user to enter if they wish to play again
-        cout << "game over!, play again? y/n" << endl;
-        getline(cin, reset);
+        std::cout << "game over!, play again? y/n" << std::endl;
+        getline(std::cin, reset);
 
         //resets everything if user wishes to
         if(reset == "y" || reset == "O")
@@ -438,7 +436,7 @@ void resetGame(string grid[], int& numOfMoves, bool& repeat)
         //runs if invalid input was entered
         else
         {
-            cout << "invalid entry, try again" << endl;
+            std::cout << "invalid entry, try again" << std::endl;
         }
     }while(validInput == false); //runs while invalid input is entered
 }
@@ -493,5 +491,5 @@ void resetGrid(string grid[])
 //displays good-bye to end user
 void closingMessage()
 {
-    cout << "Good-Bye" << endl;
+    std::cout << "Good-Bye" << std::endl;
 }
