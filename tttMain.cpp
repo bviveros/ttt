@@ -1,13 +1,14 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <iomanip>
+/*
+ * The main file that'll run the tic-tac-toe class
+ */
+
+
 #include "ttt.h"
+
 
 int main()
 {
-    TTT game;
-    game.splashScreen();
+    cout << "The beginning of Tic-Tac-Toe game" << endl;
 
     return 0;
 }

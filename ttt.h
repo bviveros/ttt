@@ -1,29 +1,28 @@
+/* 
+ * Header file for tic-tac-toe class
+ * class functions declared 
+ */
+
+
 #ifndef TTT_H
 #define TTT_H
 
-#include <string>
 #include <iostream>
-#include <cstdlib>
-#include <iomanip>
+#include <string>
 
-using namespace std;
+using std::vector;
+using std::cin;
+using std::cout;
+using std::endl;
+
+
 
 class TTT{
     public:
         //member FUNCTIONS
-        TTT();
-        void splashScreen();
-        void askForUserNames(string&, string&);
-        //void validateUserName(string&);
-        void displayGrid();
-
+    private:
         //member VARIABLES
-        string player1;
-        string player2;
-        string playerMove;
-        int numOfMoves;
-        bool playerOneTurn;
-        bool repeat;
+        
 };
 
 
