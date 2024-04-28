@@ -1,9 +1,14 @@
+# Makefile for tic-tac-toe game
+
 CPP = g++
 
-CPPFLAGS = -Wall
+CPPFLAGS = -g -Wall
 
-PRODUCT = 
+all: ttt
 
-tic_tac_toe: tttMain.cpp
-		# g++ -std=c++11 tttMain.cpp ttt.cpp ttt.h
-		g++ -Wall -o $@ $@.cpp ttt.cpp ttt.h
+clean: 
+	-rm -f *.o *.d
+	-rm -f ttt
+
+ttt: ttt_main.cpp ttt.o
+		$(CPP) $(CPPFLAGS) -o $@ ttt_main.cpp
