@@ -1,14 +1,45 @@
 # Makefile for tic-tac-toe game
 
-CPP = g++
+# compiler
+CXX= g++
 
-CPPFLAGS = -g -Wall
+# compiler flags for release
+CXXFLAGS= -Wall -Wextra
 
-all: ttt
+# linker flags
+LDFLAGS=
 
-clean: 
-	-rm -f *.o *.d
-	-rm -f ttt
+# object files
+OBJ= ttt_main.o ttt.o
 
-ttt: ttt_main.cpp ttt.o
-		$(CPP) $(CPPFLAGS) -o $@ ttt_main.cpp
+# name of executable
+EXEC= ttt
+
+# choose target: release or debug
+all: release # release or debug
+
+release: CXXFLAGS += -O2
+release: $(EXEC)
+
+debug: CXXFLAGS += -g
+debug: $(EXEC)
+
+# linking the object files into the final executable
+$(EXEC): $(OBJ)
+	$(CXX) $(OBJ) -o $(EXEC) $(LDFLAGS)
+
+# compiling ttt_main.cpp to ttt_main.o
+ttt_main.o: ttt_main.cpp ttt.h
+	$(CXX) $(CXXFLAGS) -c ttt_main.cpp
+
+# compiling ttt.cpp to ttt.o
+ttt.o: ttt.cpp ttt.h
+	$(CXX) $(CXXFLAGS) -c ttt.cpp
+
+# clean up objects and executable
+clean:
+	rm -f $(OBJ) $(EXEC)
+	rm -rf $(EXEC).dSYM # cleaning up macOS debugging info
+
+# prevent Make from mistaking a target for a filename
+.PHONY: all clean
