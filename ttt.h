@@ -7,22 +7,23 @@
 #ifndef TTT_H
 #define TTT_H
 
-#include <iostream>
 #include <string>
 
-using std::vector;
-using std::cin;
-using std::cout;
-using std::endl;
-
-
+using std::string;
 
 class TTT{
     public:
-        //member FUNCTIONS
+        /* member functions */
+        void display_grid();
     private:
-        //member VARIABLES
-        
+        /* member variables */
+        // names of the players
+        string player1;
+        string player2;
+        // pieces the players will use
+        char o_piece = 'o';
+        char x_piece = 'x';
+
 };
 
 
