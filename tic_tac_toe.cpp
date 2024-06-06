@@ -149,6 +149,7 @@ void displayGrid(string grid[], string& playerMove, const string player1, const 
             checkTie(grid, numOfMoves, win, endGame);//function call, checks if game is a tie
         }
 
+//   }while(endGame != true || win != true); //runs while game is not over
   }while(endGame != true && win != true); //runs while game is not over
 
 }

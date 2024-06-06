@@ -18,7 +18,7 @@ void TTT::initialize_grid()
 
 }
 
-void TTT::display_grid()
+void TTT::display_updated_grid()
 {
   std::cout << "Current Grid" << std::endl;
   for(int i = 0; i < 3; i++){
@@ -34,12 +34,16 @@ void TTT::display_grid()
   }
 }
 
-void TTT::get_players_names()
+void TTT::set_players_names()
 {
   std::cout << "Enter player 1's name: ";
-  std::cin >> player1;
+  std::cin >> m_player1;
 
   std::cout << "Enter player 2's name: ";
-  std::cin >> player2;
+  std::cin >> m_player2;
+
+  system("clear");
+
+  std::cout << "Welcome to tic-tac-toe " << m_player1 << "(X) and " << m_player2 << "(O)" << std::endl;
 }
 

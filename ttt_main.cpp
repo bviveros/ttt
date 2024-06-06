@@ -7,22 +7,27 @@
 #include <string>
 #include <iomanip>
 
-/* only using specific sections from the std namespace */
-using std::cin;
-using std::cout;
-using std::endl;
-using std::setw;
-using std::setfill;
-
 /* user defined libraries */
 #include "ttt.h"
 
 /* function prototypes */
 void splash_screen();
+void farewell_screen();
 
 int main()
 {
+    /* intro screen */
     splash_screen();
+
+    /* declare tic-tac-toe object */
+    TTT game;
+
+    /* set the names of the two players */
+    game.set_players_names();
+    game.display_updated_grid();
+
+    /* outro screen */
+    farewell_screen();
 
     return 0;
 }
@@ -30,11 +35,21 @@ int main()
 void splash_screen()
 {
     system("clear"); 
-    cout << setfill('*') << setw(24) << "\n" << setfill('*') << setw(24) << "\n";
-    cout << "****  TIC-TAC-TOE  ****" << endl;
-    cout << "****      By       ****" << endl;
-    cout << "****Braulio Viveros****" << endl;
-    cout << setfill('*') << setw(24) << "\n" << setfill('*') << setw(24) << "\n";
+    std::cout << std::setfill('*') << std::setw(24) << "\n" << std::setfill('*') << std::setw(24) << "\n";
+    std::cout << "****  TIC-TAC-TOE  ****" << std::endl;
+    std::cout << "****      By       ****" << std::endl;
+    std::cout << "****Braulio Viveros****" << std::endl;
+    std::cout << std::setfill('*') << std::setw(24) << "\n" << std::setfill('*') << std::setw(24) << "\n";
 
     system("read ballZ"); //pauses the program
+}
+
+void farewell_screen()
+{
+    std::cout << std::setfill('*') << std::setw(24) << "\n" << std::setfill('*') << std::setw(24) << "\n";
+    std::cout << "*****  Fare-well  *****"  << std::endl;
+    std::cout << std::setfill('*') << std::setw(24) << "\n" << std::setfill('*') << std::setw(24) << "\n";
+
+    system("read ballZ"); //pauses the program
+
 }
