@@ -1,8 +1,7 @@
 /*
- * The main file that'll run the tic-tac-toe class
+ * The main file that'll run the tic-tac-toe game
  */
 
-/* included libraries */
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -19,14 +18,12 @@ int main()
     /* intro screen */
     splash_screen();
 
-    /* declare tic-tac-toe object */
     TTT game;
 
-    /* set the names of the two players */
     game.set_players_names();
+    game.initialize_grid();
     game.display_updated_grid();
 
-    /* outro screen */
     farewell_screen();
 
     return 0;

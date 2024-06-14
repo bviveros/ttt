@@ -15,7 +15,6 @@ void TTT::initialize_grid()
       k++;
     }
   }
-
 }
 
 void TTT::display_updated_grid()
@@ -36,14 +35,46 @@ void TTT::display_updated_grid()
 
 void TTT::set_players_names()
 {
-  std::cout << "Enter player 1's name: ";
-  std::cin >> m_player1;
+  bool valid_player_name = true;
 
-  std::cout << "Enter player 2's name: ";
-  std::cin >> m_player2;
+  do{
+    std::cout << "Enter player 1's name: ";
+    getline(std::cin, m_player1);
+
+    valid_player_name = validate_players_names(m_player1);
+    if(!(valid_player_name)){
+      std::cout << "invalid name\nEnter a single word with alpha chars only!" << std::endl;
+    }
+  }while(!valid_player_name);
+
+  do{
+    std::cout << "Enter player 2's name: ";
+    getline(std::cin, m_player2);
+
+    valid_player_name = validate_players_names(m_player2);
+    if(!(valid_player_name)){
+      std::cout << "invalid name\nEnter a single word with alpha chars only!" << std::endl;
+    }
+  }while(!valid_player_name);
 
   system("clear");
 
   std::cout << "Welcome to tic-tac-toe " << m_player1 << "(X) and " << m_player2 << "(O)" << std::endl;
 }
 
+bool TTT::validate_players_names(std::string player_name)
+{    
+  unsigned int counter = 0; //used to stop while loop
+
+    //loop checks to see if user's name is all alpha characters
+    while(counter < player_name.length() || player_name.length() == 0){
+        if(!isalpha(player_name[counter])){//runs if non alphabet characters detected
+            counter = 0;//resets counter to 0
+            return false;
+        }
+        else{
+            counter++; //increments counter, will stop while loop
+        }
+    }
+    return true;
+}
