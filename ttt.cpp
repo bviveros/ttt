@@ -6,47 +6,23 @@
 
 #include "ttt.h"
 
-void TTT::initialize_new_grid()
-{
-  char digits[] = {'1', '2','3','4','5','6','7','8','9'};
-  int k = 1;
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 3; j++){
-      grid[i][j] = digits[k-1];
-      k++;
-    }
-  }
-}
 void TTT::initialize_grid()
 {
   char digits[] = {'1', '2','3','4','5','6','7','8','9'};
   for(int i = 0; i < 9; i++){
-    new_grid[i] = digits[i];
+    grid[i] = digits[i];
   }
 
-}
-
-void TTT::display_updated_new_grid()
-{
-  std::cout << "Current Grid" << std::endl;
-  for(int i = 0; i < 3; i++){
-    for(int j = 0; j < 3; j++){
-      std::cout << grid[i][j];
-      if(j == 2){break;}
-      std::cout << " || ";
-    }
-    std::cout << std::endl;
-    if( i == 2){break;}
-    std::cout << "___ ___ ___" << std::endl;
-    std::cout << std::endl;
-  }
 }
 
 void TTT::display_updated_grid()
 {
-  std::cout << "Current New Grid" << std::endl;
+  system("clear");
+
+  std::cout << "It is now " << cur_player << "'s turn!" << std::endl;
+  std::cout << "Current Grid" << std::endl;
   for(int i = 0; i < 9; i++){
-    std::cout << new_grid[i];
+    std::cout << grid[i];
     if((i+1)%3==0){
       std::cout << std::endl;
     std::cout << "___ ___ ___" << std::endl;
@@ -108,7 +84,6 @@ bool TTT::validate_players_names(std::string player_name)
 
 void TTT::switch_player_turn()
 {
-  std::cout << "Switch!" << std::endl;
   first_players_turn = !first_players_turn;
   if(first_players_turn){
     cur_player = m_player1;
@@ -152,14 +127,14 @@ bool TTT::valid_move()
 
   if(!player_choice.empty() && player_choice[1] == '\0'){
     board_position = atoi(player_choice.c_str());
-    return (board_position>=1 && board_position<=9 && check_position(board_position));
+    return ((board_position>=1) && (board_position<=9) && (check_position(board_position)));
   }
   return false;
 }
 
 bool TTT::check_position(int board_position)
 {
-  return(!((*grid[board_position] == m_o_piece) || (*grid[board_position] == m_x_piece)));
+  return(!((grid[board_position-1] == m_o_piece) || (grid[board_position-1] == m_x_piece)));
 }
 
 void TTT::update_grid()
@@ -168,7 +143,7 @@ void TTT::update_grid()
 
   board_position = atoi(player_choice.c_str());
 
-  new_grid[board_position] = cur_piece;
+  grid[board_position-1] = cur_piece;
 }
 
 bool TTT::winner_found()

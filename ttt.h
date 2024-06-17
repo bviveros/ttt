@@ -27,8 +27,8 @@ class TTT
         const char m_o_piece;
         const char m_x_piece;
         // grid in which the game will be played
-        char grid[3][3];
-        char new_grid[9];
+        // char grid[3][3];
+        char grid[9];
     public:
         /* member functions */
         /* constructor with initilization list */
@@ -39,19 +39,16 @@ class TTT
         first_players_turn(true),
         cur_player(""),
         cur_piece(' '),
-        m_o_piece('o'),
-        m_x_piece('x')
+        m_o_piece('O'),
+        m_x_piece('X')
         {initialize_grid();};
 
         /* regular member functions */
         void initialize_grid();
-        void initialize_new_grid();
         void display_updated_grid();
-        void display_updated_new_grid();
         void set_players_names();
         bool validate_players_names(std::string);
         void switch_player_turn();
-        // bool player_one_turn();
         std::string get_current_player_name();
         void player_move();
         bool valid_move();

@@ -22,14 +22,13 @@ int main()
 
     game.set_players_names();
     // game.initialize_grid();
-    // do{
-        std::cout << "It is now " << game.get_current_player_name() << "'s turn!" << std::endl;
+    do{
         game.display_updated_grid();
         game.player_move();
         game.update_grid();
 
         game.switch_player_turn();
-    // }while();
+    }while(true);
 
     farewell_screen();
 
