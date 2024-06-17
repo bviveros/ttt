@@ -6,18 +6,27 @@
 
 #include "ttt.h"
 
-void TTT::initialize_grid()
+void TTT::initialize_new_grid()
 {
+  char digits[] = {'1', '2','3','4','5','6','7','8','9'};
   int k = 1;
   for(int i = 0; i < 3; i++){
     for(int j = 0; j < 3; j++){
-      grid[i][j] = std::to_string(k);
+      grid[i][j] = digits[k-1];
       k++;
     }
   }
 }
+void TTT::initialize_grid()
+{
+  char digits[] = {'1', '2','3','4','5','6','7','8','9'};
+  for(int i = 0; i < 9; i++){
+    new_grid[i] = digits[i];
+  }
 
-void TTT::display_updated_grid()
+}
+
+void TTT::display_updated_new_grid()
 {
   std::cout << "Current Grid" << std::endl;
   for(int i = 0; i < 3; i++){
@@ -30,6 +39,22 @@ void TTT::display_updated_grid()
     if( i == 2){break;}
     std::cout << "___ ___ ___" << std::endl;
     std::cout << std::endl;
+  }
+}
+
+void TTT::display_updated_grid()
+{
+  std::cout << "Current New Grid" << std::endl;
+  for(int i = 0; i < 9; i++){
+    std::cout << new_grid[i];
+    if((i+1)%3==0){
+      std::cout << std::endl;
+    std::cout << "___ ___ ___" << std::endl;
+      std::cout << std::endl;
+    }
+    if((i+1)%3!=0){
+      std::cout << " || ";
+    }
   }
 }
 
@@ -59,11 +84,13 @@ void TTT::set_players_names()
 
   system("clear");
 
+  cur_player = m_player1;
+
   std::cout << "Welcome to tic-tac-toe " << m_player1 << "(X) and " << m_player2 << "(O)" << std::endl;
 }
 
 bool TTT::validate_players_names(std::string player_name)
-{    
+{
   unsigned int counter = 0; //used to stop while loop
 
     //loop checks to see if user's name is all alpha characters
@@ -77,4 +104,79 @@ bool TTT::validate_players_names(std::string player_name)
         }
     }
     return true;
+}
+
+void TTT::switch_player_turn()
+{
+  std::cout << "Switch!" << std::endl;
+  first_players_turn = !first_players_turn;
+  if(first_players_turn){
+    cur_player = m_player1;
+  }
+  else{
+    cur_player = m_player2;
+  }
+  
+}
+
+std::string TTT::get_current_player_name()
+{
+  return cur_player;
+}
+
+void TTT::player_move()
+{
+  if(first_players_turn){
+    cur_piece = m_x_piece;
+  }
+  else{
+    cur_piece = m_o_piece;
+  }
+
+  bool valid = false;
+  
+  do {
+    std::cout << "Pick a number on the current grid" << std::endl;
+    getline(std::cin ,player_choice);
+    valid = valid_move();
+    if(!valid){
+      std::cout << "Invalid choice; try again" << std::endl;
+    }
+  }while(!valid);
+
+}
+
+bool TTT::valid_move()
+{
+  int board_position = 0;
+
+  if(!player_choice.empty() && player_choice[1] == '\0'){
+    board_position = atoi(player_choice.c_str());
+    return (board_position>=1 && board_position<=9 && check_position(board_position));
+  }
+  return false;
+}
+
+bool TTT::check_position(int board_position)
+{
+  return(!((*grid[board_position] == m_o_piece) || (*grid[board_position] == m_x_piece)));
+}
+
+void TTT::update_grid()
+{
+  int board_position = 0;
+
+  board_position = atoi(player_choice.c_str());
+
+  new_grid[board_position] = cur_piece;
+}
+
+bool TTT::winner_found()
+{
+  return false;
+}
+
+bool TTT::tie_found()
+{
+  return false;
 }
