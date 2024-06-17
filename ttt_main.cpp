@@ -19,6 +19,9 @@ int main()
     splash_screen();
 
     TTT game;
+    bool winner = false;
+    bool tie = false;
+    short total_moves = 0;
 
     game.set_players_names();
     // game.initialize_grid();
@@ -26,9 +29,24 @@ int main()
         game.display_updated_grid();
         game.player_move();
         game.update_grid();
+        total_moves++;
 
-        game.switch_player_turn();
-    }while(true);
+        winner = game.winner_found();
+        if(!winner){
+            tie = game.tie_found(total_moves);
+            if(!tie){
+                game.switch_player_turn();
+            }
+        }
+
+    }while(!winner && !tie);
+
+    if(winner){
+        std::cout << "The winner of the game was: " << game.get_winner() << "!" << std::endl;
+    }
+    else{
+        std::cout << "The game was a tie!" << std::endl;
+    }
 
     farewell_screen();
 

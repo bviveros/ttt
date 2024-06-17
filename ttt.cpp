@@ -91,7 +91,6 @@ void TTT::switch_player_turn()
   else{
     cur_player = m_player2;
   }
-  
 }
 
 std::string TTT::get_current_player_name()
@@ -118,7 +117,6 @@ void TTT::player_move()
       std::cout << "Invalid choice; try again" << std::endl;
     }
   }while(!valid);
-
 }
 
 bool TTT::valid_move()
@@ -148,10 +146,42 @@ void TTT::update_grid()
 
 bool TTT::winner_found()
 {
+  // Winning combinations (same as before)
+  const int winningLines[8][3] = {
+      {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Rows
+      {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Columns
+      {0, 4, 8}, {2, 4, 6}             // Diagonals
+  };
+
+  for (int i = 0; i < 8; i++) { // Iterate through winning lines
+      const int* line = winningLines[i]; // Get current line
+
+      // Check if all positions in the line are the same and not a digit
+      if (grid[line[0]] != ' ' && 
+          !isdigit(grid[line[0]]) && 
+          grid[line[0]] == grid[line[1]] && 
+          grid[line[1]] == grid[line[2]]) {
+          winner = cur_player;
+          return grid[line[0]]; // Return the winning mark
+      }
+  }
   return false;
 }
 
-bool TTT::tie_found()
+bool TTT::tie_found(short total_moves)
 {
-  return false;
+  // for (int i = 0; i < 9; i++) {
+  //   if (grid[i] == ' ' || isdigit(grid[i])){
+  //       return false;
+  //   }
+  // }
+  // return true; // All cells filled, and no winner, so it's a tie
+
+  return (total_moves == 9);
+}
+
+
+std::string TTT::get_winner()
+{
+  return winner;
 }

@@ -19,6 +19,7 @@ class TTT
         std::string m_player1;
         std::string m_player2;
         std::string player_choice;
+        std::string winner;
         // current player's turn
         bool first_players_turn;
         std::string cur_player;
@@ -27,7 +28,6 @@ class TTT
         const char m_o_piece;
         const char m_x_piece;
         // grid in which the game will be played
-        // char grid[3][3];
         char grid[9];
     public:
         /* member functions */
@@ -36,6 +36,7 @@ class TTT
         m_player1(""), 
         m_player2(""),
         player_choice(""),
+        winner(""),
         first_players_turn(true),
         cur_player(""),
         cur_piece(' '),
@@ -55,7 +56,8 @@ class TTT
         bool check_position(int);
         void update_grid();
         bool winner_found();
-        bool tie_found();
+        bool tie_found(short);
+        std::string get_winner();
 };
 
 #endif
@@ -71,8 +73,8 @@ class TTT
 **    void checkPositionAvailability(const string[], string&, bool&);
 **    void updateGrid(string[], const string, const bool);
 **    void switchPlayer(bool&);
-    void checkWin(const string[], string, bool&);
-    void checkTie(string[], const int, const bool, bool&);
+**    void checkWin(const string[], string, bool&);
+**    void checkTie(string[], const int, const bool, bool&);
     void displayFinalGrid(const string[]);
     void resetGame(string[], int&, bool&);
     void resetGrid(string[]);
