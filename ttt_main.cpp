@@ -42,6 +42,7 @@ int main()
     }while(!winner && !tie);
 
     if(winner){
+        game.display_updated_grid();
         std::cout << "The winner of the game was: " << game.get_winner() << "!" << std::endl;
     }
     else{

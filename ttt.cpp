@@ -12,7 +12,6 @@ void TTT::initialize_grid()
   for(int i = 0; i < 9; i++){
     grid[i] = digits[i];
   }
-
 }
 
 void TTT::display_updated_grid()
@@ -69,14 +68,13 @@ bool TTT::validate_players_names(std::string player_name)
 {
   unsigned int counter = 0; //used to stop while loop
 
-    //loop checks to see if user's name is all alpha characters
     while(counter < player_name.length() || player_name.length() == 0){
-        if(!isalpha(player_name[counter])){//runs if non alphabet characters detected
-            counter = 0;//resets counter to 0
+        if(!isalpha(player_name[counter])){
+            counter = 0;
             return false;
         }
         else{
-            counter++; //increments counter, will stop while loop
+            counter++;
         }
     }
     return true;
@@ -146,23 +144,21 @@ void TTT::update_grid()
 
 bool TTT::winner_found()
 {
-  // Winning combinations (same as before)
   const int winningLines[8][3] = {
       {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Rows
       {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Columns
       {0, 4, 8}, {2, 4, 6}             // Diagonals
   };
 
-  for (int i = 0; i < 8; i++) { // Iterate through winning lines
-      const int* line = winningLines[i]; // Get current line
+  for (int i = 0; i < 8; i++) {
+      const int* line = winningLines[i];
 
-      // Check if all positions in the line are the same and not a digit
       if (grid[line[0]] != ' ' && 
           !isdigit(grid[line[0]]) && 
           grid[line[0]] == grid[line[1]] && 
           grid[line[1]] == grid[line[2]]) {
           winner = cur_player;
-          return grid[line[0]]; // Return the winning mark
+          return grid[line[0]];
       }
   }
   return false;
@@ -170,13 +166,6 @@ bool TTT::winner_found()
 
 bool TTT::tie_found(short total_moves)
 {
-  // for (int i = 0; i < 9; i++) {
-  //   if (grid[i] == ' ' || isdigit(grid[i])){
-  //       return false;
-  //   }
-  // }
-  // return true; // All cells filled, and no winner, so it's a tie
-
   return (total_moves == 9);
 }
 

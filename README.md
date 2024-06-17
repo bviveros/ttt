@@ -12,3 +12,5 @@ each space on the board has a number associated with it.
 a player will input the number that they wish their respective piece(x or o) to go on
 
 game allows for a single play through
+
+run the command 'make' to compile the cpp file. accompanying makefile will help compile the program easily
